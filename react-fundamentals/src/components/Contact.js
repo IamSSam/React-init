@@ -34,6 +34,22 @@ export default class Contact extends React.Component {
         this.handleRemove = this.handleRemove.bind(this);
         this.handleEdit = this.handleEdit.bind(this);
     }
+    //componenet가 dom위에 생기기 전에 실행되는 함수
+    componentWillMount() {
+      const contactData = localStorage.contactData;
+
+      if(contactData){
+        this.setState({
+          contactData: JSON.parse(contactData)
+        })
+      }
+    }
+
+    componentDidUpdate(preProps, prevState) {
+      if(JSON.stringify(prevState.contactData) != JSON.stringify(this.state.contactData)) {
+        localStorage.contactData = JSON.stringify(this.state.contactData);
+      }
+    }
 
     handleChange(e){
       this.setState({
