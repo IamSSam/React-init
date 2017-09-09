@@ -10,6 +10,7 @@ export default class ContactCreate extends React.Component {
       };
       this.handleChange = this.handleChange.bind(this);
       this.handleClick = this.handleClick.bind(this);
+      this.handleKeyPress = this.handleKeyPress.bind(this);
   }
 
   handleChange(e) {
@@ -32,6 +33,13 @@ export default class ContactCreate extends React.Component {
     });
   }
 
+  handleKeyPress(e) {
+    // enter일 경우
+    if(e.charCode === 13){
+      this.handleClick();
+    }
+  }
+
   render() {
     return (
       <div>
@@ -42,14 +50,15 @@ export default class ContactCreate extends React.Component {
             name="name"
             placeholder="name"
             value={this.state.name}
-            onChange={this.handleChange}
-          />
+          onChange={this.handleChange}
+        />
           <input
             type="text"
             name="phone"
             placeholder="phone"
             value={this.state.phone}
             onChange={this.handleChange}
+            onKeyPress={this.handleKeyPress}
           />
         </p>
         <button onClick={this.handleClick}>Create</button>
